@@ -51,53 +51,65 @@ const Index = () => {
 
   return (
     <div className="min-h-screen py-12 px-4">
-      <div className="container mx-auto">
-        <HeroSection />
-        
-        {/* Ad after hero - horizontal banner */}
-        <GoogleAd adSlot="1234567890" adFormat="horizontal" />
-        
-        <CategorySelector
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-        
-        <InputSection
-          keyword={keyword}
-          story={story}
-          onKeywordChange={setKeyword}
-          onStoryChange={setStory}
-          onGenerate={handleGenerate}
-          isGenerating={isGenerating}
-        />
+      <div className="container mx-auto relative">
+        {/* Left Sidebar Ad - Hidden on mobile/tablet */}
+        <div className="hidden xl:block fixed left-4 top-24 w-[160px]">
+          <GoogleAd adSlot="5678901234" adFormat="vertical" fullWidthResponsive={false} />
+        </div>
 
-        {/* Ad before results */}
-        <GoogleAd adSlot="2345678901" />
-        
-        <ResultsSection
-          names={generatedNames}
-          favorites={favorites}
-          onToggleFavorite={toggleFavorite}
-        />
+        {/* Right Sidebar Ad - Hidden on mobile/tablet */}
+        <div className="hidden xl:block fixed right-4 top-24 w-[160px]">
+          <GoogleAd adSlot="6789012345" adFormat="vertical" fullWidthResponsive={false} />
+        </div>
 
-        {/* Ad between results and favorites (only show if there are results) */}
-        {generatedNames.length > 0 && (
-          <GoogleAd adSlot="3456789012" adFormat="rectangle" />
-        )}
+        <div className="max-w-6xl mx-auto">
+          <HeroSection />
+          
+          {/* Ad after hero - horizontal banner */}
+          <GoogleAd adSlot="1234567890" adFormat="horizontal" />
+          
+          <CategorySelector
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+          
+          <InputSection
+            keyword={keyword}
+            story={story}
+            onKeywordChange={setKeyword}
+            onStoryChange={setStory}
+            onGenerate={handleGenerate}
+            isGenerating={isGenerating}
+          />
 
-        <FavoritesSection
-          favorites={favorites}
-          onToggleFavorite={toggleFavorite}
-        />
+          {/* Ad before results */}
+          <GoogleAd adSlot="2345678901" />
+          
+          <ResultsSection
+            names={generatedNames}
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+          />
 
-        {/* Ad after favorites (only show if there are favorites) */}
-        {favorites.length > 0 && (
-          <GoogleAd adSlot="4567890123" />
-        )}
+          {/* Ad between results and favorites (only show if there are results) */}
+          {generatedNames.length > 0 && (
+            <GoogleAd adSlot="3456789012" adFormat="rectangle" />
+          )}
 
-        <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
-          <p>© 2025 Name Finder. Generate unique names for free.</p>
-        </footer>
+          <FavoritesSection
+            favorites={favorites}
+            onToggleFavorite={toggleFavorite}
+          />
+
+          {/* Ad after favorites (only show if there are favorites) */}
+          {favorites.length > 0 && (
+            <GoogleAd adSlot="4567890123" />
+          )}
+
+          <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
+            <p>© 2025 Name Finder. Generate unique names for free.</p>
+          </footer>
+        </div>
       </div>
     </div>
   );
