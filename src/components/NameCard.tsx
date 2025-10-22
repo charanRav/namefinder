@@ -14,7 +14,7 @@ const NameCard = ({ name, isFavorite, onToggleFavorite }: NameCardProps) => {
     toast.success("Name copied to clipboard!");
   };
 
-  const domainCheckUrl = `https://www.namecheap.com/domains/registration/results/?domain=${name.toLowerCase()}.com`;
+  const domainCheckUrl = `https://namecheap.pxf.io/Bn7A10?domain=${name.toLowerCase()}.com`;
 
   return (
     <div className="group bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm rounded-xl p-6 shadow-[var(--shadow-soft)] border border-border/50 hover:shadow-[var(--shadow-glow)] hover:scale-[1.02] transition-all duration-300">
