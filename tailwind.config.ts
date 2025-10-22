@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sora: ['Sora', 'sans-serif'],
+        exo: ['Exo 2', 'sans-serif'],
+        kanit: ['Kanit', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
