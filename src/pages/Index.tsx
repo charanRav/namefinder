@@ -50,12 +50,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="container mx-auto">
+    <div className="min-h-screen py-12 px-4 relative">
+      {/* Left Sidebar Ad - Desktop only */}
+      <div className="fixed left-4 top-24 hidden xl:block w-[160px]">
+        <GoogleAd adSlot="1234567890" adFormat="vertical" fullWidthResponsive={false} />
+      </div>
+
+      {/* Right Sidebar Ad - Desktop only */}
+      <div className="fixed right-4 top-24 hidden xl:block w-[160px]">
+        <GoogleAd adSlot="2345678901" adFormat="vertical" fullWidthResponsive={false} />
+      </div>
+
+      <div className="container mx-auto max-w-6xl">
         <HeroSection />
         
         {/* Ad after hero - horizontal banner */}
-        <GoogleAd adSlot="1234567890" adFormat="horizontal" />
+        <GoogleAd adSlot="3456789012" adFormat="horizontal" />
         
         <CategorySelector
           selectedCategory={selectedCategory}
@@ -72,7 +82,9 @@ const Index = () => {
         />
 
         {/* Ad before results */}
-        <GoogleAd adSlot="2345678901" />
+        {generatedNames.length > 0 && (
+          <GoogleAd adSlot="4567890123" />
+        )}
         
         <ResultsSection
           names={generatedNames}
@@ -81,8 +93,8 @@ const Index = () => {
         />
 
         {/* Ad between results and favorites (only show if there are results) */}
-        {generatedNames.length > 0 && (
-          <GoogleAd adSlot="3456789012" adFormat="rectangle" />
+        {generatedNames.length > 0 && favorites.length > 0 && (
+          <GoogleAd adSlot="5678901234" adFormat="rectangle" />
         )}
 
         <FavoritesSection
@@ -92,7 +104,7 @@ const Index = () => {
 
         {/* Ad after favorites (only show if there are favorites) */}
         {favorites.length > 0 && (
-          <GoogleAd adSlot="4567890123" />
+          <GoogleAd adSlot="6789012345" />
         )}
 
         <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
