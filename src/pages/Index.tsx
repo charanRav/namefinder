@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import CategorySelector, { Category } from "@/components/CategorySelector";
 import InputSection from "@/components/InputSection";
-import AdPlaceholder from "@/components/AdPlaceholder";
+import GoogleAd from "@/components/GoogleAd";
 import ResultsSection from "@/components/ResultsSection";
 import FavoritesSection from "@/components/FavoritesSection";
 import { generateNames } from "@/utils/nameGenerator";
@@ -54,6 +54,9 @@ const Index = () => {
       <div className="container mx-auto">
         <HeroSection />
         
+        {/* Ad after hero - horizontal banner */}
+        <GoogleAd adSlot="1234567890" adFormat="horizontal" />
+        
         <CategorySelector
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
@@ -68,7 +71,8 @@ const Index = () => {
           isGenerating={isGenerating}
         />
 
-        <AdPlaceholder />
+        {/* Ad before results */}
+        <GoogleAd adSlot="2345678901" />
         
         <ResultsSection
           names={generatedNames}
@@ -76,12 +80,20 @@ const Index = () => {
           onToggleFavorite={toggleFavorite}
         />
 
+        {/* Ad between results and favorites (only show if there are results) */}
+        {generatedNames.length > 0 && (
+          <GoogleAd adSlot="3456789012" adFormat="rectangle" />
+        )}
+
         <FavoritesSection
           favorites={favorites}
           onToggleFavorite={toggleFavorite}
         />
 
-        <AdPlaceholder />
+        {/* Ad after favorites (only show if there are favorites) */}
+        {favorites.length > 0 && (
+          <GoogleAd adSlot="4567890123" />
+        )}
 
         <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
           <p>© 2025 Name Finder. Generate unique names for free.</p>
