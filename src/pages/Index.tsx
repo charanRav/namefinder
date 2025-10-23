@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import HeroSection from "@/components/HeroSection";
 import CategorySelector, { Category } from "@/components/CategorySelector";
 import InputSection from "@/components/InputSection";
@@ -109,6 +110,9 @@ const Index = () => {
 
         <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
           <p>© 2025 Name Finder. Generate unique names for free.</p>
+          <Link to="/blog" className="inline-block mt-4 text-primary hover:text-primary/80 font-medium">
+            Read Our Blog →
+          </Link>
         </footer>
       </div>
     </div>
