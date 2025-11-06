@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import CategorySelector, { Category } from "@/components/CategorySelector";
 import InputSection from "@/components/InputSection";
@@ -50,72 +52,101 @@ const Index = () => {
     );
   };
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Name Finder",
+    "description": "AI-powered name generator for businesses, startups, YouTube channels, games, and podcasts. Generate unique, creative, and brandable names instantly for free.",
+    "url": "https://namefinder-nu.vercel.app",
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Name Finder"
+    }
+  };
+
   return (
-    <div className="min-h-screen py-12 px-4 relative">
-      {/* Left Sidebar Ad - Desktop only */}
-      <div className="fixed left-4 top-24 hidden xl:block w-[160px]">
-        <GoogleAd adSlot="1234567890" adFormat="vertical" fullWidthResponsive={false} />
+    <>
+      <Helmet>
+        <title>Name Finder - AI Business Name Generator | Free Startup & Brand Names</title>
+        <meta name="description" content="Generate unique business names, startup names, YouTube channel names, game names, and podcast names with our free AI-powered name generator. Get instant creative name ideas and check domain availability." />
+        <meta name="keywords" content="business name generator, startup name ideas, brand name generator, company name generator, YouTube name generator, podcast name generator, game name generator, AI name generator, free name finder" />
+        <link rel="canonical" href="https://namefinder-nu.vercel.app/" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
+
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        
+        <main className="flex-1 py-12 px-4 relative">
+          {/* Left Sidebar Ad - Desktop only */}
+          <div className="fixed left-4 top-24 hidden xl:block w-[160px]">
+            <GoogleAd adSlot="1234567890" adFormat="vertical" fullWidthResponsive={false} />
+          </div>
+
+          {/* Right Sidebar Ad - Desktop only */}
+          <div className="fixed right-4 top-24 hidden xl:block w-[160px]">
+            <GoogleAd adSlot="2345678901" adFormat="vertical" fullWidthResponsive={false} />
+          </div>
+
+          <div className="container mx-auto max-w-6xl">
+            <HeroSection />
+            
+            {/* Ad after hero - horizontal banner */}
+            <GoogleAd adSlot="3456789012" adFormat="horizontal" />
+            
+            <CategorySelector
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+            />
+            
+            <InputSection
+              keyword={keyword}
+              story={story}
+              onKeywordChange={setKeyword}
+              onStoryChange={setStory}
+              onGenerate={handleGenerate}
+              isGenerating={isGenerating}
+            />
+
+            {/* Ad before results */}
+            {generatedNames.length > 0 && (
+              <GoogleAd adSlot="4567890123" />
+            )}
+            
+            <ResultsSection
+              names={generatedNames}
+              favorites={favorites}
+              onToggleFavorite={toggleFavorite}
+            />
+
+            {/* Ad between results and favorites (only show if there are results) */}
+            {generatedNames.length > 0 && favorites.length > 0 && (
+              <GoogleAd adSlot="5678901234" adFormat="rectangle" />
+            )}
+
+            <FavoritesSection
+              favorites={favorites}
+              onToggleFavorite={toggleFavorite}
+            />
+
+            {/* Ad after favorites (only show if there are favorites) */}
+            {favorites.length > 0 && (
+              <GoogleAd adSlot="6789012345" />
+            )}
+          </div>
+        </main>
+
+        <Footer />
       </div>
-
-      {/* Right Sidebar Ad - Desktop only */}
-      <div className="fixed right-4 top-24 hidden xl:block w-[160px]">
-        <GoogleAd adSlot="2345678901" adFormat="vertical" fullWidthResponsive={false} />
-      </div>
-
-      <div className="container mx-auto max-w-6xl">
-        <HeroSection />
-        
-        {/* Ad after hero - horizontal banner */}
-        <GoogleAd adSlot="3456789012" adFormat="horizontal" />
-        
-        <CategorySelector
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-        
-        <InputSection
-          keyword={keyword}
-          story={story}
-          onKeywordChange={setKeyword}
-          onStoryChange={setStory}
-          onGenerate={handleGenerate}
-          isGenerating={isGenerating}
-        />
-
-        {/* Ad before results */}
-        {generatedNames.length > 0 && (
-          <GoogleAd adSlot="4567890123" />
-        )}
-        
-        <ResultsSection
-          names={generatedNames}
-          favorites={favorites}
-          onToggleFavorite={toggleFavorite}
-        />
-
-        {/* Ad between results and favorites (only show if there are results) */}
-        {generatedNames.length > 0 && favorites.length > 0 && (
-          <GoogleAd adSlot="5678901234" adFormat="rectangle" />
-        )}
-
-        <FavoritesSection
-          favorites={favorites}
-          onToggleFavorite={toggleFavorite}
-        />
-
-        {/* Ad after favorites (only show if there are favorites) */}
-        {favorites.length > 0 && (
-          <GoogleAd adSlot="6789012345" />
-        )}
-
-        <footer className="text-center text-muted-foreground text-sm mt-16 pb-8">
-          <p>© 2025 Name Finder. Generate unique names for free.</p>
-          <Link to="/blog" className="inline-block mt-4 text-primary hover:text-primary/80 font-medium">
-            Read Our Blog →
-          </Link>
-        </footer>
-      </div>
-    </div>
+    </>
   );
 };
 

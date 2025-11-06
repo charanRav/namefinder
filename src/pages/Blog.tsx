@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const Blog = () => {
   return (
@@ -8,16 +10,11 @@ const Blog = () => {
         <title>Blog - Name Finder | Business Naming Tips & Guides</title>
         <meta name="description" content="Expert tips and guides for choosing the perfect business name. Learn how to create unique brand names and startup names that stand out." />
         <meta name="keywords" content="business name ideas, startup naming, brand name generator, name finder tool, unique business names" />
+        <link rel="canonical" href="https://namefinder-nu.vercel.app/blog" />
       </Helmet>
       
-      <div className="min-h-screen bg-gradient-to-b from-background to-accent/10">
-        <header className="py-8 px-4 border-b bg-background/95 backdrop-blur">
-          <div className="container mx-auto max-w-6xl">
-            <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
-              ← Name Finder
-            </Link>
-          </div>
-        </header>
+      <div className="min-h-screen flex flex-col">
+        <Header />
 
         <main className="container mx-auto max-w-4xl px-4 py-12">
           <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Business Naming Blog</h1>
@@ -189,16 +186,9 @@ const Blog = () => {
             </Link>
           </article>
 
-          <div className="text-center mt-12">
-            <Link to="/" className="text-primary hover:text-primary/80 font-semibold text-lg">
-              ← Back to Name Generator
-            </Link>
-          </div>
         </main>
 
-        <footer className="text-center text-muted-foreground text-sm py-8 border-t bg-background/95">
-          <p>© 2025 Name Finder. Generate unique names for free.</p>
-        </footer>
+        <Footer />
       </div>
     </>
   );
