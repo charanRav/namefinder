@@ -4,13 +4,33 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Blog = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Name Finder Blog",
+    "description": "Expert tips on business naming, brand identity, and startup branding strategies",
+    "url": "https://namefinder-nu.vercel.app/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Name Finder",
+      "url": "https://namefinder-nu.vercel.app"
+    }
+  };
+
   return (
     <>
       <Helmet>
-        <title>Blog - Name Finder | Business Naming Tips & Guides</title>
-        <meta name="description" content="Expert tips and guides for choosing the perfect business name. Learn how to create unique brand names and startup names that stand out." />
-        <meta name="keywords" content="business name ideas, startup naming, brand name generator, name finder tool, unique business names" />
+        <title>Blog - Name Finder | Business Naming Tips & Strategies</title>
+        <meta name="description" content="Expert tips on business naming, brand identity, domain selection, and startup branding strategies. Learn how to create memorable, unique business names." />
+        <meta name="keywords" content="business naming tips, brand name strategies, startup naming guide, domain selection, business branding, naming best practices" />
         <link rel="canonical" href="https://namefinder-nu.vercel.app/blog" />
+        <meta property="og:title" content="Blog - Name Finder | Business Naming Tips & Strategies" />
+        <meta property="og:description" content="Expert tips on business naming, brand identity, domain selection, and startup branding strategies." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://namefinder-nu.vercel.app/blog" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
       
       <div className="min-h-screen flex flex-col">

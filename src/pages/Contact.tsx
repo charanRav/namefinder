@@ -18,6 +18,20 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Name Finder",
+    "description": "Get in touch with Name Finder for support, feedback, or partnership inquiries.",
+    "url": "https://namefinder-nu.vercel.app/contact",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Name Finder",
+      "email": "contact@namefinder.com",
+      "url": "https://namefinder-nu.vercel.app"
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -50,6 +64,13 @@ const Contact = () => {
         <meta name="description" content="Have questions about Name Finder? Contact our team for support, feedback, or partnership inquiries. We're here to help you find the perfect business name." />
         <meta name="keywords" content="contact name finder, support, feedback, business name help, naming assistance" />
         <link rel="canonical" href="https://namefinder-nu.vercel.app/contact" />
+        <meta property="og:title" content="Contact Us - Name Finder | Get in Touch" />
+        <meta property="og:description" content="Have questions about Name Finder? Contact our team for support, feedback, or partnership inquiries." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://namefinder-nu.vercel.app/contact" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col">

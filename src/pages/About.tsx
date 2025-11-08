@@ -4,6 +4,26 @@ import Footer from "@/components/Footer";
 import { Target, Lightbulb, Users, Zap } from "lucide-react";
 
 const About = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Name Finder",
+    "description": "Learn about Name Finder's mission to help entrepreneurs and creators find the perfect business name using AI technology.",
+    "url": "https://namefinder-nu.vercel.app/about",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Name Finder",
+      "url": "https://namefinder-nu.vercel.app",
+      "logo": "https://namefinder-nu.vercel.app/favicon.ico",
+      "description": "AI-powered name generator for businesses, startups, YouTube channels, games, and podcasts",
+      "foundingDate": "2024",
+      "email": "contact@namefinder.com",
+      "sameAs": [
+        "https://namefinder-nu.vercel.app"
+      ]
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -11,6 +31,13 @@ const About = () => {
         <meta name="description" content="Learn about Name Finder's mission to help entrepreneurs and creators find the perfect business name. We combine AI technology with creative expertise to generate unique, brandable names." />
         <meta name="keywords" content="about name finder, business naming tool, startup name generator, AI name generator, brand naming service" />
         <link rel="canonical" href="https://namefinder-nu.vercel.app/about" />
+        <meta property="og:title" content="About Us - Name Finder | AI-Powered Business Name Generator" />
+        <meta property="og:description" content="Learn about Name Finder's mission to help entrepreneurs and creators find the perfect business name using AI technology." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://namefinder-nu.vercel.app/about" />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
