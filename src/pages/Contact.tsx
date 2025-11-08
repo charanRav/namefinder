@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MessageSquare, Clock } from "lucide-react";
+import { MessageSquare, Clock } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -46,15 +46,38 @@ const Contact = () => {
 
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+    try {
+      const response = await fetch("https://formspree.io/f/xblpqoqg", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
-      setFormData({ name: "", email: "", subject: "", message: "" });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -85,20 +108,7 @@ const Contact = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              <div className="bg-card rounded-xl shadow-lg p-6 text-center">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="font-semibold mb-2">Email Us</h3>
-                <p className="text-muted-foreground text-sm mb-2">
-                  For general inquiries and support
-                </p>
-                <a href="mailto:contact@namefinder.com" className="text-primary hover:underline">
-                  contact@namefinder.com
-                </a>
-              </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-2xl mx-auto">
               <div className="bg-card rounded-xl shadow-lg p-6 text-center">
                 <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Clock className="w-6 h-6 text-secondary" />
@@ -201,6 +211,12 @@ const Contact = () => {
                   <h3 className="font-semibold mb-2">Is Name Finder really free?</h3>
                   <p className="text-muted-foreground text-sm">
                     Yes! Name Finder is completely free to use. We generate revenue through affiliate partnerships with domain registrars.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">How will you contact me?</h3>
+                  <p className="text-muted-foreground text-sm">
+                    We'll respond to the email address you provide in the contact form above within 24 hours.
                   </p>
                 </div>
                 <div>
