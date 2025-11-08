@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-
 const Footer = () => {
-  return (
-    <footer className="border-t bg-background/95 backdrop-blur mt-16">
+  return <footer className="border-t bg-background/95 backdrop-blur mt-16">
       <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
@@ -73,13 +71,10 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t text-center text-muted-foreground text-sm">
           <p>© {new Date().getFullYear()} Name Finder. All rights reserved.</p>
-          <p className="mt-2">
-            Generate unique and creative names for your business, startup, or brand.
-          </p>
+          <p className="mt-2">Generate unique and creative names for your business, startup, or brand.
+By Recuriq</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
